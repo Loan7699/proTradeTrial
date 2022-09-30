@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.bg {
+  background-image: url(https://protrade-trial.vndirect.com.vn/static/media/pt_trial.a0934fd1.svg), url(https://static-01.vndirect.com.vn/images/dpro/dpro_login_bg.jpg);
+  background-repeat: no-repeat, no-repeat;
+  background-position: 50% 14%, center bottom;
+  background-size: 350px, cover;
+  display: block;
+}
+
+.box-shadow {
+  box-shadow: rgb(0 0 0 / 14%) 0px 0px 4px, rgb(0 0 0 / 28%) 0px 4px 8px;
+}
