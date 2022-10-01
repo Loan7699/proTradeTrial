@@ -47,7 +47,7 @@ function Login() {
                         </div>
                         <div>
                             <button type="submit" className="text-[#ffffff] bg-[#18c451] p-[9px] text-[13px] font-bold rounded-[5px] w-[12.5rem] my-2.5 mx-auto">
-                                <HiLockClosed className="inline-block mb-1 mr-1" />
+                                <HiLockClosed className="inline-block mb-1.5 mr-1" />
                                 <a href='https://account-v2.vndirect.com.vn/' target='_blank'>Mở tài khoản</a>
                             </button>
                         </div>

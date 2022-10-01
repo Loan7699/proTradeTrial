@@ -1,7 +1,7 @@
 
 function FooterLeft() {
     return (
-        <div>Footer left</div>
+        <p>Bản quyền thuộc về VNDIRECT © 2022. v2.2.3</p>
     )
 }
 

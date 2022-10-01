@@ -1,7 +1,12 @@
+import OtherCmd from './OtherCmd';
+import OrderBook from './OrderBook';
 
 function ColThird() {
     return (
-        <div>Col 3</div>
+        <div>
+            <OrderBook />
+            <OtherCmd />
+        </div>
     )
 }
 

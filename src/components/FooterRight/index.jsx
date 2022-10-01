@@ -1,7 +1,13 @@
 
 function FooterRight() {
     return (
-        <div>Footer right</div>
+        <div>
+            <ul>
+                <li>Sổ lệnh</li>
+                <li>Danh mục</li>
+                <li>Tài sản</li>
+            </ul>
+        </div>
     )
 }
 
