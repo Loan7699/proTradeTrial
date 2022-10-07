@@ -1,10 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FaMinus, FaSyncAlt } from 'react-icons/fa'
 import InDay from './InDay'
 import Condition from './Condition'
+import axios from 'axios'
 
 function OrderBook({ handleShow }) {
     const [option, setOption] = useState("asset1")
+    const [orderData, setOrderData] = useState([])
+    const username = localStorage.getItem('name')
+
+    useEffect(() => {
+        axios.get(`https://dertrial-api.vndirect.com.vn/demotrade/orders?username=${username}`)
+        .then(res => setOrderData(res.data))
+    }, [])
 
     return (
         <div className='flex-1 m-px overflow-auto bg-[#2f3240]'>
@@ -16,7 +24,7 @@ function OrderBook({ handleShow }) {
                     <FaMinus className='mx-2 text-[#f7941d]' onClick={handleShow}/>
                 </div>
             </div>
-            { option === "asset1" && <InDay />}
+            { option === "asset1" && <InDay orderData={orderData}/>}
             { option === "asset2" && <Condition />}
         </div>
     )

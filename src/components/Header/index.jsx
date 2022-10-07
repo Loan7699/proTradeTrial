@@ -74,7 +74,7 @@ function Header({ setShowPopup }) {
 
                 <div className='relative username h-[40px] leading-[40px] hover:bg-[#393939]'>
                     <div className='flex items-center mr-4'>
-                        <FaUser className='pr-1' />
+                        <FaUser className='pr-1 text-[15px] pb-0.5' />
                         <span className='pr-1 uppercase'>{name}</span>
                         <BsFillCaretDownFill />
                     </div>

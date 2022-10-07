@@ -30,3 +30,4 @@ function Close() {
     )
 }
 export default Close
+// get: https://dertrial-api.vndirect.com.vn/demotrade/portfolio?username=phuong_loan&position=close

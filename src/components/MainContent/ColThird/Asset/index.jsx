@@ -28,3 +28,5 @@ function Asset({ handleShow }) {
     )
 }
 export default Asset;
+// get: https://dertrial-api.vndirect.com.vn/demotrade/assets?username=phuong_loan
+// {"username":"phuong_loan","cashOnHand":100519.50000000931,"positionFeeAccrual":0,"totalFee":0,"pp":null,"ppLong":null,"ppShort":6013500,"totalPnlAmount":0,"requiredAddAmount":0,"collateralAmount":30000000,"incomeTax":0,"netAssetValue":30100519.500000007,"_id":"AYODFjuWnZneC_ZLwYNM"}

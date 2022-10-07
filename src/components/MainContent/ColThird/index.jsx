@@ -56,24 +56,6 @@ function ColThird({ menu, handleShow }) {
                                 <span>{item.type}</span>
                             </li>
                         ))}
-                        {/* <li className="px-1.5 cursor-pointer">
-                            <input type='radio' name="asset" id="ass1" value='aseset 1' className="mr-[3px]" onClick={setTypeCmd("1")} />
-                            <label htmlFor="ass1">Lệnh thường</label>
-                        </li>
-                        <li className="px-1.5 cursor-pointer">
-                            <input type='radio' name="asset" id="ass2" value='aseset 1' className="mr-[3px]" onClick={setTypeCmd("2")} />
-                            <label htmlFor="ass2">Lệnh Stop</label>
-                        </li>
-
-                        <li className="px-1.5 cursor-pointer" >
-                            <input type='radio' name="asset" id="ass3" value='aseset 1' className="mr-[3px]" onClick={setTypeCmd("1")} />
-                            <label htmlFor="ass3">Lệnh trailing</label>
-                        </li>
-                        <li className="px-1.5 cursor-pointer" >
-                            <input type='radio' name="asset" id="ass4" value='aseset 1' className="mr-[3px]" onClick={setTypeCmd("1")} />
-                       
-                            <label htmlFor="ass4">Lệnh OSO</label>
-                        </li> */}
                     </ul>
                     {typeCmd === 1 && <OtherCmd />}
                     {typeCmd === 2 && <CmdStop />}

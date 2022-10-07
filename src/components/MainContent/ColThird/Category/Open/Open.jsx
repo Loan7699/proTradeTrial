@@ -32,3 +32,9 @@ function Open() {
     )
 }
 export default Open
+
+// get= https://dertrial-api.vndirect.com.vn/demotrade/portfolio?username=phuong_loan&position=open
+// [{"username":"phuong_loan","symbol":"VN30F2210","quantity":2,"side":"Long","costPrice":1032.2}]
+
+// delete: https://dertrial-api.vndirect.com.vn/demotrade/orders
+// {orderID: 1665157893606, userName: "phuong_loan"}
