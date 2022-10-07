@@ -1,51 +1,70 @@
-function OtherCmd() {
+import ReactTooltip from 'react-tooltip';
+import { useState, useEffect } from 'react'
+import axios from 'axios';
+
+function OtherCmd(props) {
+
+    const [code, setCode] = useState('')
+    const [price, setPrice] = useState('')
+    const [weight, setWeight] = useState('')
+    console.log(weight, code, price);
+
+    // const handleBuy = () => {
+    //     axios.post('https://dertrial-api.vndirect.com.vn/demotrade/orders',
+    //     // {side: "NB", symbol: "VN30F2210", priceType: "ATO", quantity: 1, price: 0, userName: "phuong_loan"}
+    //     {
+    //         side: "NB", 
+    //         symbol: code, 
+    //         priceType: price, 
+    //         quantity: weight, 
+    //         price: 0, 
+    //         userName: localStorage.getItem('name')
+    //     })
+    //     .then(res => console.log(res))
+
+    //     .catch(err => console.log(err.res.data))
+    // }
+
+    const handleBuy = () => {}
+
     return (
-        <div>
-                <div>
-                    <div>
-                        <ul>
-                            <li>
-                                <input type='radio' />
-                                <label>Lệnh thường</label>
-                            </li>
-                            <li>
-                                <input type='radio' />
-                                <label>Lệnh Stop</label>
-                            </li>
+        <>
+            <div className="pb-[5px] h-[2.5rem] leading-[2.1875rem]">
+                <label className="pl-2.5 w-[8.125rem] inline-block">Mã HĐTL: </label>
+                {/* <input type="text" placeholder='Mã' className="w-60 rounded h-[1.875rem] px-[5px] text-[#333333] outline-none" /> */}
+                <select required className="w-60 rounded h-[1.875rem] px-[5px] outline-none text-[#333333]" value={code} onChange={(e) => setCode(e.target.value)}>
+                    <option value="" disabled selected hidden className='placeholder'>Mã</option>
+                    <option value="VN30F2210">VN30F2210</option>
+                    <option value="VN30F2211">VN30F2211</option>
+                    <option value="VN30F2212">VN30F2212</option>
+                    <option value="VN30F2303">VN30F2303</option>
+                </select>
+            </div>
+            <div className="pb-[5px] h-[2.5rem] leading-[2.1875rem]">
+                <label className="pl-2.5 w-[8.125rem] inline-block">Giá đặt: </label>
+                <input type="text" placeholder='Giá' className="w-60 rounded h-[1.875rem] px-[5px] text-[#333333] outline-none" value={price} onChange={(e) => setPrice(e.target.value)} />
 
-                            <li>
-                                <input type='radio' />
-                                <label>Lệnh trailing</label>
-                            </li>
-                            <li>
-                                <input type='radio' />
-                                <label>Lệnh OSO</label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <label>Mã HĐTL: </label>
-                        <input type="text" placeholder='Mã' />
-                    </div>
-                    <div>
-                        <label>Giá đặt: </label>
-                        <input type="text" placeholder='Giá' />
+            </div>
+            <div className="pb-[5px] h-[2.5rem] leading-[2.1875rem]">
+                <label className="pl-2.5 w-[8.125rem] inline-block">Khối lượng: </label>
+                <input type="text" placeholder='KL' className="w-60 rounded h-[1.875rem] px-[5px] text-[#333333] outline-none"
+                    value={weight} onChange={(e) => setWeight(e.target.value)}
+                    data-tip="<div><span>KL mua tối đa: 1 &nbsp;&nbsp;&nbsp;&nbsp;</span><span>KL bán tối đa: 1</span></div>"
+                    data-html={true} data-for="sell"
+                />
 
-                    </div>
-                    <div>
-                        <label>Khối lượng: </label>
-                        <input type="text" placeholder='KL' />
-                    </div>
-                    <div>
-                        <button>MUA</button>
-                        <button>BÁN</button>
-                        <div>
-                            <input type="checkbox"/>
-                            <label>Lưu lệnh</label>
-                        </div>
-                    </div>
+                <ReactTooltip type="dark" place='bottom' event='click' globalEventOff="click" backgroundColor="#444444" id='sell' data-id="tooltip" className='react-tooltip'>
+                </ReactTooltip>
+            </div>
+            <div className="flex py-[5px] h-[2.8125rem] pl-[70px]">
+                <button className="w-[110px] h-[30px] mx-[5px] rounded-[5px] cursor-pointer text-sm font-bold bg-[green]" onClick={handleBuy}>MUA</button>
+                <button className="w-[110px] h-[30px] mx-[5px] rounded-[5px] cursor-pointer text-sm font-bold bg-[red]">BÁN</button>
+                <div className="h-[2.5rem] py-[5px] pl-1 cursor-pointer">
+                    <input type="checkbox" />
+                    <label className="pl-[3px]">Lưu lệnh</label>
                 </div>
             </div>
+        </>
     )
 }
 export default OtherCmd

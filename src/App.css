@@ -38,7 +38,8 @@
 }
 
 .bg {
-  background-image: url(https://protrade-trial.vndirect.com.vn/static/media/pt_trial.a0934fd1.svg), url(https://static-01.vndirect.com.vn/images/dpro/dpro_login_bg.jpg);
+  background-image: url(https://protrade-trial.vndirect.com.vn/static/media/pt_trial.a0934fd1.svg),
+    url(https://static-01.vndirect.com.vn/images/dpro/dpro_login_bg.jpg);
   background-repeat: no-repeat, no-repeat;
   background-position: 50% 14%, center bottom;
   background-size: 350px, cover;
@@ -47,4 +48,88 @@
 
 .box-shadow {
   box-shadow: rgb(0 0 0 / 14%) 0px 0px 4px, rgb(0 0 0 / 28%) 0px 4px 8px;
+}
+
+.height-content {
+  height: calc(100vh - 40px);
+}
+
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.width-history {
+  width: calc(100% + 10px);
+}
+
+.username:hover ul.logout {
+  display: block;
+}
+
+.choose {
+  color: #f7941d;
+  background-color: #2f3240;
+}
+
+.active {
+  color: #f7941d;
+}
+
+.disActive {
+  color: #ffffff;
+}
+
+.bg-img {
+  background-image: linear-gradient(275deg, #751b7a, #252061);
+  box-shadow: 0 0 5px 0 rgb(0 0 0 / 30);
+}
+
+.item {
+  height: 30px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  /* color: #fff; */
+  padding: 0 5px;
+  line-height: 30px;
+  position: relative;
+}
+
+.bg-other {
+  box-shadow: 0 0 3px 0 rgb(0 0 0 / 30%);
+    background-image: linear-gradient(302deg,#ff8a00,#f7c41d)
+}
+
+.item-other {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 2px;
+  color: #ffffff;
+}
+
+.bg-right {
+  box-shadow: 0 0 10px 0 rgb(0 0 0 / 30%);
+  background-color: #fff;
+}
+
+.bg-top {
+  background-image: linear-gradient(302deg,#ff8a00,#f7c41d);
+  box-shadow: 0 0 5px 0 rgb(0 0 0 / 30%);
+}
+
+select {
+  /* for Firefox */
+  -moz-appearance: none;
+  /* for Chrome */
+  -webkit-appearance: none;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+select:required:invalid { 
+  color: gray; 
+}
+
+option {
+  color: #333333;
 }
