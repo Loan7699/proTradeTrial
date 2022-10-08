@@ -4,9 +4,9 @@ import OrderBook from './OrderBook';
 import Category from './Category'
 import Asset from './Asset'
 import CmdStop from './CmdStop';
+import axios from 'axios';
 
 function ColThird({ menu, handleShow }) {
-    const [typeCmd, setTypeCmd] = useState(1)
 
     const listType = [
         {
@@ -31,10 +31,64 @@ function ColThird({ menu, handleShow }) {
         },
     ];
 
+    const [typeCmd, setTypeCmd] = useState(1)
+    const [code, setCode] = useState('')
+    const [priceType, setPriceType] = useState('')
+    const [weight, setWeight] = useState('')
+
+    const dataBuy = {
+        side: "NB",
+        symbol: code,
+        priceType,
+        quantity: Number(weight),
+        price: 0,
+        userName: localStorage.getItem('name')
+    }
+
+    const dataSell = {
+        side: "NS",
+        symbol: code,
+        priceType,
+        quantity: Number(weight),
+        price: 0,
+    }
+
+    const handleBuy = () => {
+        axios.post("https://dertrial-api.vndirect.com.vn/demotrade/orders",
+            {
+                side: "NB",
+                symbol: code,
+                priceType,
+                quantity: Number(weight),
+                price: 0,
+                userName: localStorage.getItem('name')
+            }
+        )
+            .then(res => console.log(res))
+
+            .catch(err => console.log(err.res))
+    }
+
+    const handleSell = () => {
+        axios.post("https://dertrial-api.vndirect.com.vn/demotrade/orders",
+            {
+                side: "NS",
+                symbol: code,
+                priceType,
+                quantity: Number(weight),
+                price: 0,
+                userName: localStorage.getItem('name')
+            }
+        )
+            .then(res => console.log(res))
+
+            .catch(err => console.log(err.res))
+    }
+
     return (
         <div className='w-[25rem] flex flex-col'>
             {/* render col trên  */}
-            {menu === "1" && <OrderBook handleShow={handleShow} />}
+            {menu === "1" && <OrderBook handleShow={handleShow} dataBuy={dataBuy} dataSell={dataSell}/>}
             {menu === "2" && <Category handleShow={handleShow} />}
             {menu === "3" && <Asset handleShow={handleShow} />}
 
@@ -57,7 +111,16 @@ function ColThird({ menu, handleShow }) {
                             </li>
                         ))}
                     </ul>
-                    {typeCmd === 1 && <OtherCmd />}
+                    {typeCmd === 1 && <OtherCmd
+                        handleSell={handleSell}
+                        handleBuy={handleBuy}
+                        code={code}
+                        priceType={priceType}
+                        weight={weight}
+                        setCode={setCode}
+                        setPriceType={setPriceType}
+                        setWeight={setWeight}
+                    />}
                     {typeCmd === 2 && <CmdStop />}
                 </div>
             </div>

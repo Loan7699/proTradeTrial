@@ -11,16 +11,7 @@ function MainContent() {
 
     const handleMenu = (id) => {
         setMenu(id)
-        // if (id === id) {
-        //     document.getElementById(`${id}`).style.color = "#f7941d"
-        // } else {
-        //     document.getElementById(`${id}`).style.color = "#ffffff"
-        // }
-        // document.getElementById(`${id}`).style.color = "#f7941d"
-        // document.getElementById(`${id}`).style.backgroundColor = "#2f3240"
-        // console.log(document.getElementById(`${id}`));
         setShowCol(true)
-        // console.log(document.getElementById(`${id}`));
     }
     
     const handleShowCol = () => {

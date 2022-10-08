@@ -4,15 +4,15 @@ import InDay from './InDay'
 import Condition from './Condition'
 import axios from 'axios'
 
-function OrderBook({ handleShow }) {
+function OrderBook({ handleShow, dataBuy, dataSell }) {
     const [option, setOption] = useState("asset1")
-    const [orderData, setOrderData] = useState([])
+    const [orderDatas, setOrderDatas] = useState([])
     const username = localStorage.getItem('name')
 
     useEffect(() => {
         axios.get(`https://dertrial-api.vndirect.com.vn/demotrade/orders?username=${username}`)
-        .then(res => setOrderData(res.data))
-    }, [])
+        .then(res => setOrderDatas(res.data))  
+    }, [dataBuy, dataSell])
 
     return (
         <div className='flex-1 m-px overflow-auto bg-[#2f3240]'>
@@ -24,7 +24,7 @@ function OrderBook({ handleShow }) {
                     <FaMinus className='mx-2 text-[#f7941d]' onClick={handleShow}/>
                 </div>
             </div>
-            { option === "asset1" && <InDay orderData={orderData}/>}
+            { option === "asset1" && <InDay orderDatas={orderDatas} setOrderDatas={setOrderDatas} dataBuy={dataBuy} dataSell={dataSell}/>}
             { option === "asset2" && <Condition />}
         </div>
     )

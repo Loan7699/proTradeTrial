@@ -1,7 +1,39 @@
-import { FaMinusCircle, FaHourglassStart, FaCheckCircle, FaTrashAlt, FaTimesCircle } from 'react-icons/fa'
+import { FaMinusCircle, FaHourglassStart, FaCheckCircle, FaTrashAlt, FaRegTimesCircle } from 'react-icons/fa'
 import ReactTooltip from 'react-tooltip'
+import axios from 'axios'
+import { useState } from 'react'
 
-function InDay({ orderData }) {
+function InDay({ orderDatas, setOrderDatas }) {
+    const [showDelete, setShowDelete] = useState(false)
+    const [showIcon, setShowIcon] = useState(true)
+
+    const handleDelete = (id) => {
+        let data = JSON.stringify(
+            { orderID: id, userName: localStorage.getItem('name') }
+        )
+        axios({
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            method: 'delete',
+            url: "https://dertrial-api.vndirect.com.vn/demotrade/order",
+            data
+        })
+            .then(res => {
+                console.log(res);
+                if (res.status === 200) {
+                    let itemData = orderDatas.filter(item => item.orderID === Number(id))
+                    console.log(itemData);
+                    itemData[0].status = "Cancelled"
+                    console.log(itemData[0].status);
+                    setOrderDatas(prev => [
+                        ...prev,
+                        itemData
+                    ])
+                }
+            })
+    }
+
     return (
         <div>
             <table className="w-full border-spacing-0 border-collapse">
@@ -11,7 +43,6 @@ function InDay({ orderData }) {
                     <col width="90px" className="table-column"></col>
                     <col width="70px" className="table-column"></col>
                     <col width="60px" className="table-column"></col>
-                    <col width="30px" className="table-column"></col>
                 </colgroup>
 
                 <thead className="table-header-column align-middle">
@@ -27,10 +58,9 @@ function InDay({ orderData }) {
                 </thead>
 
                 <tbody className="table-row-group align-middle">
-                    {orderData.length
+                    {orderDatas.length
                         ?
-                        // {
-                        orderData.map((orderData, index) =>
+                        orderDatas.map((orderData, index) =>
                             <tr className="leading-[2rem] table-row text-left" key={index}>
                                 {orderData.status == 'New' || orderData.status == 'PendingNew' ? <td className="min-w-[20px] table-cell"><input type='checkbox' className='m-[3px]' /></td> : <td className="min-w-[20px] table-cell"></td>}
                                 {orderData.side == "NB" ? <td className="table-cell text-[#0f0]">Mua</td> : <td className="table-cell text-[#ff4747]">Bán</td>}
@@ -48,11 +78,26 @@ function InDay({ orderData }) {
                                 }
 
                                 <td className="table-cell">{orderData.orderType}</td>
-                                <td className="table-cell">
+                                <td className="flex justify-between items-center h-[34px]">
                                     {(orderData.status === "New" || orderData.status === "PendingNew") && <FaHourglassStart className='text-[#f7941d] m-[3px]' data-tip="Chờ gửi lên sàn" data-for="hour" />}
                                     {(orderData.status === "Rejected") && <FaMinusCircle className='text-[#d80027] m-[3px]' data-tip="Hệ thống Demo không hỗ trợ đặt lệnh giá này (FDS-079)" data-for="reject" />}
                                     {(orderData.status === "Filled") && <FaCheckCircle className='text-[#43a038]  m-[3px]' data-tip="Khớp" data-for="check" />}
                                     {(orderData.status === "Cancelled") && <FaTrashAlt className='text-[#af449c] m-[3px]' data-tip="Hủy thành công" data-for="trash" />}
+
+                                    {(orderData.status === "New") ||(orderData.status === "PendingNew") &&
+                                        <span onClick={() => {
+            
+                                        }} >
+                                            <FaRegTimesCircle className='text-[#ff3459] m-[3px]' id={orderData.orderID} onClick={(e) => handleDelete(e.target.id)}/>
+                                        </span>
+                                    }
+
+                                    {((orderData.status === "New") && setShowDelete) || (setShowDelete && (orderData.status === "PendingNew")) &&
+                                        <td className='leading-[25px] flex'>
+                                            <button className='bg-[#f7941d] rounded-[3px] w-[42px] mr-0.5' >Hủy</button>
+                                            <button className='bg-[#acacac] rounded-[3px] w-[42px] mr-0.5'>Không</button>
+                                        </td>
+                                    }
 
                                     <ReactTooltip place='top' type="light" id='hour' data-id="hour" className='react-tooltip'></ReactTooltip>
                                     <ReactTooltip place='top' type="light" id='check' data-id="check" className='react-tooltip'>
@@ -62,17 +107,11 @@ function InDay({ orderData }) {
                                     <ReactTooltip place='top' type="light" id='reject' data-id="reject" className='react-tooltip'>
                                     </ReactTooltip>
                                 </td>
-
-                                {(orderData.status === "New") || (orderData.status === "PendingNew") && <td>
-                                    <FaTimesCircle className='text-[#ff3459] m-[3px]' />
-                                </td>}
-
                             </tr>
                         )
-                        // }
                         :
                         <tr className="leading-[2rem] table-row">
-                            <td colSpan="7" className="leading-[3.125rem] text-[#777777] text-[15px] ">Chưa có lệnh nào trong sổ lệnh</td>
+                            <td colSpan="6" className="leading-[3.125rem] text-[#777777] text-[15px] ">Chưa có lệnh nào trong sổ lệnh</td>
                         </tr>
                     }
                 </tbody>
