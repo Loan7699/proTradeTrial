@@ -1,4 +1,18 @@
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+
 function Open() {
+    const [categoryDatas, setCategoryDatas] = useState([])
+
+    useEffect(() => {
+        axios.get("https://dertrial-api.vndirect.com.vn/demotrade/portfolio?username=phuong_loan&position=open")
+            .then(res => {
+                console.log(res.data)
+                setCategoryDatas(res.data)
+            })
+    }, [])
+    console.log(categoryDatas);
+
     return (
         <div>
             <table className="w-full ">
@@ -7,8 +21,8 @@ function Open() {
                     <col width="40px" className="table-column"></col>
                     <col width="60px" className="table-column"></col>
                     <col width="60px" className="table-column"></col>
-                    <col className="table-column"/>
-                    <col className="table-column"/>
+                    <col className="table-column" />
+                    <col className="table-column" />
                 </colgroup>
 
                 <thead className="table-header-column h-[46px]">
@@ -23,9 +37,14 @@ function Open() {
                 </thead>
 
                 <tbody className="table-row-group align-middle">
-                    <tr className="leading-[2rem] table-row">
-                        <td colSpan="6" className="leading-[3.125rem] text-[#777777] text-[15px] ">Chưa có lệnh nào trong sổ lệnh</td>
-                    </tr>
+                    {categoryDatas.length > 0
+                        ?
+                        <tr></tr>
+                        :
+                        <tr className="leading-[2rem] table-row">
+                            <td colSpan="6" className="leading-[3.125rem] text-[#777777] text-[15px] ">Chưa có lệnh nào trong sổ lệnh</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>

@@ -35,23 +35,8 @@ function ColThird({ menu, handleShow }) {
     const [code, setCode] = useState('')
     const [priceType, setPriceType] = useState('')
     const [weight, setWeight] = useState('')
-
-    const dataBuy = {
-        side: "NB",
-        symbol: code,
-        priceType,
-        quantity: Number(weight),
-        price: 0,
-        userName: localStorage.getItem('name')
-    }
-
-    const dataSell = {
-        side: "NS",
-        symbol: code,
-        priceType,
-        quantity: Number(weight),
-        price: 0,
-    }
+    const [dataBuy, setDataBuy] = useState('')
+    const [dataSell, setDataSell] = useState('')
 
     const handleBuy = () => {
         axios.post("https://dertrial-api.vndirect.com.vn/demotrade/orders",
@@ -114,12 +99,15 @@ function ColThird({ menu, handleShow }) {
                     {typeCmd === 1 && <OtherCmd
                         handleSell={handleSell}
                         handleBuy={handleBuy}
+
                         code={code}
                         priceType={priceType}
                         weight={weight}
+                        
                         setCode={setCode}
                         setPriceType={setPriceType}
                         setWeight={setWeight}
+                        setDataBuy={setDataBuy}
                     />}
                     {typeCmd === 2 && <CmdStop />}
                 </div>

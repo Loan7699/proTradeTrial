@@ -11,7 +11,8 @@ function OrderBook({ handleShow, dataBuy, dataSell }) {
 
     useEffect(() => {
         axios.get(`https://dertrial-api.vndirect.com.vn/demotrade/orders?username=${username}`)
-        .then(res => setOrderDatas(res.data))  
+        .then(res => setOrderDatas(res.data)) 
+        console.log(dataBuy); 
     }, [dataBuy, dataSell])
 
     return (
@@ -24,7 +25,7 @@ function OrderBook({ handleShow, dataBuy, dataSell }) {
                     <FaMinus className='mx-2 text-[#f7941d]' onClick={handleShow}/>
                 </div>
             </div>
-            { option === "asset1" && <InDay orderDatas={orderDatas} setOrderDatas={setOrderDatas} dataBuy={dataBuy} dataSell={dataSell}/>}
+            { option === "asset1" && <InDay orderDatas={orderDatas} setOrderDatas={setOrderDatas} />}
             { option === "asset2" && <Condition />}
         </div>
     )

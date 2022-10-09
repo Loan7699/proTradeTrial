@@ -4,8 +4,7 @@ import axios from 'axios'
 import { useState } from 'react'
 
 function InDay({ orderDatas, setOrderDatas }) {
-    const [showDelete, setShowDelete] = useState(false)
-    const [showIcon, setShowIcon] = useState(true)
+    const [select, setSelect] = useState()
 
     const handleDelete = (id) => {
         let data = JSON.stringify(
@@ -78,35 +77,37 @@ function InDay({ orderDatas, setOrderDatas }) {
                                 }
 
                                 <td className="table-cell">{orderData.orderType}</td>
-                                <td className="flex justify-between items-center h-[34px]">
-                                    {(orderData.status === "New" || orderData.status === "PendingNew") && <FaHourglassStart className='text-[#f7941d] m-[3px]' data-tip="Chờ gửi lên sàn" data-for="hour" />}
-                                    {(orderData.status === "Rejected") && <FaMinusCircle className='text-[#d80027] m-[3px]' data-tip="Hệ thống Demo không hỗ trợ đặt lệnh giá này (FDS-079)" data-for="reject" />}
-                                    {(orderData.status === "Filled") && <FaCheckCircle className='text-[#43a038]  m-[3px]' data-tip="Khớp" data-for="check" />}
-                                    {(orderData.status === "Cancelled") && <FaTrashAlt className='text-[#af449c] m-[3px]' data-tip="Hủy thành công" data-for="trash" />}
+                                { select !== orderData
+                                    ?
+                                    <td className="flex justify-between items-center h-[34px]">
+                                        {((orderData.status === "New") || (orderData.status === "PendingNew")) && <FaHourglassStart className='text-[#f7941d] m-[3px]' data-tip="Chờ gửi lên sàn" data-for="hour" />}
+                                        {(orderData.status === "Rejected") && <FaMinusCircle className='text-[#d80027] m-[3px]' data-tip="Hệ thống Demo không hỗ trợ đặt lệnh giá này (FDS-079)" data-for="reject" />}
+                                        {(orderData.status === "Filled") && <FaCheckCircle className='text-[#43a038]  m-[3px]' data-tip="Khớp" data-for="check" />}
+                                        {(orderData.status === "Cancelled") && <FaTrashAlt className='text-[#af449c] m-[3px]' data-tip="Hủy thành công" data-for="trash" />}
 
-                                    {(orderData.status === "New") ||(orderData.status === "PendingNew") &&
-                                        <span onClick={() => {
-            
-                                        }} >
-                                            <FaRegTimesCircle className='text-[#ff3459] m-[3px]' id={orderData.orderID} onClick={(e) => handleDelete(e.target.id)}/>
-                                        </span>
-                                    }
+                                        {(orderData.status === "New" || orderData.status === "PendingNew") &&
+                                            <FaRegTimesCircle className='text-[#ff3459] m-[3px]' onClick={() => {
+                                                setSelect(orderData)
+                                            }} />
+                                        }
 
-                                    {((orderData.status === "New") && setShowDelete) || (setShowDelete && (orderData.status === "PendingNew")) &&
-                                        <td className='leading-[25px] flex'>
-                                            <button className='bg-[#f7941d] rounded-[3px] w-[42px] mr-0.5' >Hủy</button>
-                                            <button className='bg-[#acacac] rounded-[3px] w-[42px] mr-0.5'>Không</button>
-                                        </td>
-                                    }
-
-                                    <ReactTooltip place='top' type="light" id='hour' data-id="hour" className='react-tooltip'></ReactTooltip>
-                                    <ReactTooltip place='top' type="light" id='check' data-id="check" className='react-tooltip'>
-                                    </ReactTooltip>
-                                    <ReactTooltip place='top' type="light" id='trash' data-id="trash" className='react-tooltip'>
-                                    </ReactTooltip>
-                                    <ReactTooltip place='top' type="light" id='reject' data-id="reject" className='react-tooltip'>
-                                    </ReactTooltip>
-                                </td>
+                                        <ReactTooltip place='top' type="light" id='hour' data-id="hour" className='react-tooltip'></ReactTooltip>
+                                        <ReactTooltip place='top' type="light" id='check' data-id="check" className='react-tooltip'>
+                                        </ReactTooltip>
+                                        <ReactTooltip place='top' type="light" id='trash' data-id="trash" className='react-tooltip'>
+                                        </ReactTooltip>
+                                        <ReactTooltip place='top' type="light" id='reject' data-id="reject" className='react-tooltip'>
+                                        </ReactTooltip>
+                                    </td>
+                                    :
+                                    <td className='leading-[25px] flex'>
+                                        <button className='bg-[#f7941d] rounded-[3px] w-[42px] mr-0.5' id={orderData.orderID} onClick={(e) => {
+                                            handleDelete(e.target.id)
+                                            setSelect()
+                                        }} >Hủy</button>
+                                        <button className='bg-[#acacac] rounded-[3px] w-[42px] mr-0.5' onClick={() => setSelect()}>Không</button>
+                                    </td>
+                                }
                             </tr>
                         )
                         :
