@@ -9,7 +9,7 @@ function Homepage() {
     return (
         <div>
             <Header setShowPopup={setShowPopup}/>
-            <MainContent className=""/>
+            <MainContent />
             { showPopup && <Popup setShowPopup={setShowPopup} /> }
         </div>
     )

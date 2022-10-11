@@ -2,11 +2,14 @@ import { FaMinusCircle, FaHourglassStart, FaCheckCircle, FaTrashAlt, FaRegTimesC
 import ReactTooltip from 'react-tooltip'
 import axios from 'axios'
 import { useState } from 'react'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function InDay({ orderDatas, setOrderDatas }) {
     const [select, setSelect] = useState()
 
     const handleDelete = (id) => {
+        console.log(id);
         let data = JSON.stringify(
             { orderID: id, userName: localStorage.getItem('name') }
         )
@@ -19,20 +22,20 @@ function InDay({ orderDatas, setOrderDatas }) {
             data
         })
             .then(res => {
-                console.log(res);
                 if (res.status === 200) {
                     let itemData = orderDatas.filter(item => item.orderID === Number(id))
                     console.log(itemData);
+                    console.log(orderDatas);
                     itemData[0].status = "Cancelled"
-                    console.log(itemData[0].status);
-                    setOrderDatas(prev => [
-                        ...prev,
-                        itemData
+                    setOrderDatas([
+                        ...orderDatas
                     ])
                 }
+                toast.success("Hủy lệnh thành công")
             })
     }
-
+    console.log(orderDatas);
+    
     return (
         <div>
             <table className="w-full border-spacing-0 border-collapse">
@@ -57,6 +60,7 @@ function InDay({ orderDatas, setOrderDatas }) {
                 </thead>
 
                 <tbody className="table-row-group align-middle">
+                    <ToastContainer />
                     {orderDatas.length
                         ?
                         orderDatas.map((orderData, index) =>
@@ -77,7 +81,7 @@ function InDay({ orderDatas, setOrderDatas }) {
                                 }
 
                                 <td className="table-cell">{orderData.orderType}</td>
-                                { select !== orderData
+                                {select !== orderData
                                     ?
                                     <td className="flex justify-between items-center h-[34px]">
                                         {((orderData.status === "New") || (orderData.status === "PendingNew")) && <FaHourglassStart className='text-[#f7941d] m-[3px]' data-tip="Chờ gửi lên sàn" data-for="hour" />}

@@ -1,5 +1,5 @@
 
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 
 function OtherCmd(props) {
     const codeList = ["VN30F2210", "VN30F2211", "VN30F2212", "VN30F2303"]

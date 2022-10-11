@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom'
-import Tippy from '@tippyjs/react';
 import { FaInfoCircle, FaSignInAlt } from "react-icons/fa"
 import { HiLockClosed } from "react-icons/hi"
 import axios from 'axios';
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ReactTooltip from 'react-tooltip';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
 
     const [username, setName] = useState("")
     const [password, setPassword] = useState("")
-    const [errMsg, setErrorMsg] = useState("")
 
     const navigate = useNavigate()
     let data = JSON.stringify({
@@ -44,8 +44,7 @@ function Login() {
             })
 
             .catch(error => {
-                console.log(error)
-                setErrorMsg("Tên đăng nhập hoặc mật khẩu bạn vừa nhập chưa đúng, xin vui lòng thử lại. (AUTH-02) (gbcwi)")
+                toast.error("Tên đăng nhập hoặc mật khẩu bạn vừa nhập chưa đúng, xin vui lòng thử lại. (AUTH-02) (gbcwi)")
             })
     }
 
@@ -73,9 +72,6 @@ function Login() {
                                 <label className="block text-[14px] w-[12.5rem] text-[#444444] mx-auto mt-[5px] mb-[3px]">
                                     <input type='checkbox' className="m-[3px]" />
                                     Ghi nhớ trạng thái đăng nhập trên trình duyệt này
-                                    {/* <Tippy
-                                        content={<div style={{ width:'1000px', color: "#ffffff", backgroundColor: "#222222", borderRadius: "3px", fontSize: "13px", transition: " opacity 0.3s ease-out", padding: "8px 21px" }}>Ghi nhớ trạng thái đăng nhập giúp Quý khách không cần phải login lại mỗi lần vào VNDIRECT trên trình duyệt này. Để hủy trạng thái, Quý khách vui lòng Đăng xuất.</div>}
-                                    > */}
                                     <span data-tip="Ghi nhớ trạng thái đăng nhập giúp Quý khách không cần phải login lại mỗi lần vào VNDIRECT trên trình duyệt này. Để hủy trạng thái, Quý khách vui lòng Đăng xuất." data-for="noteWarning" data-class="note-tooltip">
                                         <span>
                                             <FaInfoCircle className="inline-block ml-2" />
@@ -83,7 +79,6 @@ function Login() {
                                     </span>
                                     <ReactTooltip className='react-tooltip place-top type-dark note-tooltip' id='noteWarning' data-id="tooltip" >
                                     </ReactTooltip>
-                                    {/* </Tippy> */}
                                 </label>
                             </div>
                             <Link to="/trangchu">
@@ -103,16 +98,11 @@ function Login() {
                         <p>
                             <a href="https://dstock.vndirect.com.vn/" target="_blank">Trợ giúp</a>
                         </p>
-                        <div className="err-msg flex justify-center fixed top-10 right-5">
-                            <p className='text-[red] w-[250px] bg-[#ffffff]'>{errMsg}</p>
-                        </div>
                     </form>
+                    <ToastContainer />
                 </div>
             </div>
         </div>
     )
 }
 export default Login;
-
-// api customer: https://trade.vndirect.com.vn/v3/auth
-// auth.api.client.js

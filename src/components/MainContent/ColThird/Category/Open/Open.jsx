@@ -36,16 +36,35 @@ function Open() {
                     </tr>
                 </thead>
 
-                <tbody className="table-row-group align-middle">
-                    {categoryDatas.length > 0
-                        ?
-                        <tr></tr>
-                        :
-                        <tr className="leading-[2rem] table-row">
-                            <td colSpan="6" className="leading-[3.125rem] text-[#777777] text-[15px] ">Chưa có lệnh nào trong sổ lệnh</td>
-                        </tr>
-                    }
-                </tbody>
+                {categoryDatas.length > 0
+                    ?
+                    categoryDatas.map(categoryData =>
+                        <tbody className="table-row-group align-middle">
+                            <tr className='h-[46px]'>
+                                <td className='text-[#ffd900]'>{categoryData.symbol}</td>
+                                <td>{categoryData.quantity}</td>
+                                <td>{categoryData.costPrice}</td>
+                                <td>{categoryData.costPrice}</td>
+                                <td className='text-[#ffd900]'>0</td>
+                                <td>
+                                    <button className='bg-[#e4403d] rounded-[3px] px-[5px] mr-1'>Đảo</button>
+                                    <button className='bg-[#e4403d] rounded-[3px] px-[5px]'>Đóng</button>
+                                </td>
+                            </tr>
+                            <tr className='border-t border-solid border-[#777]'>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Tổng</td>
+                                <td>0</td>
+                            </tr>
+                        </tbody>
+                    )
+                    :
+                    <tr className="leading-[2rem] table-row">
+                        <td colSpan="6" className="leading-[3.125rem] text-[#777777] text-[15px] ">Chưa có lệnh nào trong sổ lệnh</td>
+                    </tr>
+                }
             </table>
         </div>
     )

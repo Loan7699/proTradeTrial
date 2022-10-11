@@ -6,7 +6,7 @@ import History from "./History";
 
 function ColSecond() {
 
-    const [type, setType] = useState(1)
+    const [type, setType] = useState('stepPrice')
 
     return (
         <div className="w-[21.875rem] flex flex-col">
@@ -51,15 +51,15 @@ function ColSecond() {
                 <div>
                     <ul className="flex justify-around shrink-0 text-center leading-[1.875rem] mx-auto">
                         <li>
-                            <a className={`font-bold px-[5px] leading-[1.875rem] cursor-pointer  ${type === 1 && 'active'}`} onClick={() => setType(1)}>Bước giá</a>
+                            <a className={`font-bold px-[5px] leading-[1.875rem] cursor-pointer  ${type === 'stepPrice' && 'active'}`} onClick={() => setType('stepPrice')}>Bước giá</a>
                         </li>
                         <li>
-                            <a className={`text-[#f0f0f0] cursor-pointer ${type === 2 && 'active'}`} onClick={() => setType(2)}>Lịch sử khớp lệnh</a>
+                            <a className={`text-[#f0f0f0] cursor-pointer ${type === 'history' && 'active'}`} onClick={() => setType('history')}>Lịch sử khớp lệnh</a>
                         </li>
                     </ul>
 
-                    { type === 1 && <StepPrice />}
-                    { type === 2 && <History />}
+                    { type === 'stepPrice' && <StepPrice />}
+                    { type === 'history' && <History />}
                 </div>
             </div>
             <div className="bg-[#2f3240] m-px h-[45%]">

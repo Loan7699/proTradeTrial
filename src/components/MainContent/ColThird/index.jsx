@@ -5,6 +5,8 @@ import Category from './Category'
 import Asset from './Asset'
 import CmdStop from './CmdStop';
 import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ColThird({ menu, handleShow }) {
 
@@ -32,9 +34,11 @@ function ColThird({ menu, handleShow }) {
     ];
 
     const [typeCmd, setTypeCmd] = useState(1)
+
     const [code, setCode] = useState('')
     const [priceType, setPriceType] = useState('')
     const [weight, setWeight] = useState('')
+
     const [dataBuy, setDataBuy] = useState('')
     const [dataSell, setDataSell] = useState('')
 
@@ -49,9 +53,13 @@ function ColThird({ menu, handleShow }) {
                 userName: localStorage.getItem('name')
             }
         )
-            .then(res => console.log(res))
+            .then(res => 
+                toast.success('Đặt lệnh thành công')
+            )
 
-            .catch(err => console.log(err.res))
+            .catch(err => 
+                toast.error("Đặt lệnh không thành công. Hệ thống Demo không hỗ trợ đặt lệnh loại giá này (FDS-079")
+            )
     }
 
     const handleSell = () => {
@@ -67,13 +75,16 @@ function ColThird({ menu, handleShow }) {
         )
             .then(res => console.log(res))
 
-            .catch(err => console.log(err.res))
+            .catch(err => 
+                toast.error("Đặt lệnh không thành công. Hệ thống Demo không hỗ trợ đặt lệnh loại giá này (FDS-079")
+            )
     }
-
+    
     return (
         <div className='w-[25rem] flex flex-col'>
+            <ToastContainer />
             {/* render col trên  */}
-            {menu === "1" && <OrderBook handleShow={handleShow} dataBuy={dataBuy} dataSell={dataSell}/>}
+            {menu === "1" && <OrderBook handleShow={handleShow} dataBuy={dataBuy} dataSell={dataSell} />}
             {menu === "2" && <Category handleShow={handleShow} />}
             {menu === "3" && <Asset handleShow={handleShow} />}
 
@@ -108,6 +119,7 @@ function ColThird({ menu, handleShow }) {
                         setPriceType={setPriceType}
                         setWeight={setWeight}
                         setDataBuy={setDataBuy}
+                        setDataSell={setDataSell}
                     />}
                     {typeCmd === 2 && <CmdStop />}
                 </div>

@@ -6,7 +6,10 @@ import { FaChartPie } from 'react-icons/fa'
 import TradingViewWidget, { Themes } from 'react-tradingview-widget';
 
 function ColFirst() {
-    const [typeChart, setTypeChart] = useState(1)
+    const [typeChart, setTypeChart] = useState('vn30Intraday')
+    const handleTypeChart = (id) => {
+        setTypeChart(id)
+    }
 
     return (
         <div className='flex flex-col flex-1'>
@@ -21,13 +24,11 @@ function ColFirst() {
 
             <div className='h-[45%] flex flex-col bg-[#2f3240] m-px relative'>
                 <div className='px-[5px] flex-1 border-t-2 border-solid border-[#2f3240]'>
-                    {(typeChart === 1) &&
-                        <div>
-                            Phương
-                        </div>
+                    {(typeChart === 'vn30Intraday') &&
+                        <iframe src="https://mkw.vndirect.com.vn/leader_lagger?color=gray&height=280" title="Chart" width="100%" height="100%"></iframe>
                     }
 
-                    {(typeChart === 2) &&
+                    {(typeChart === 'vn30') &&
                         <TradingViewWidget
                         symbol="NASDAQ:AAPL"
                         theme={Themes.DARK}
@@ -36,21 +37,21 @@ function ColFirst() {
                     />
                     }
 
-                    {(typeChart === 3) &&
+                    {(typeChart === 'barChart') &&
                         <iframe src="https://mkw.vndirect.com.vn/leader_lagger?color=gray&height=280" title="Chart" width="100%" height="100%"></iframe>
                     }
 
-                    {(typeChart === 4) &&
+                    {(typeChart === 'ChartPie') &&
                         <iframe src="https://mkw.vndirect.com.vn/market_cap?color=gray&amp;height=280" title="Chart" width="100%" height="100%"></iframe>
                     }
                 </div>
                 <ul className='h-[1.875rem] bg-[#131722] text-right absolute left-0 right-0 bottom-0 flex justify-end items-center'>
-                    <li className={`cursor-pointer text-center text-[#dddddd] px-4 uppercase ${typeChart === 1 && "active"}`} onClick={() => setTypeChart(1)}>vn30 intraday</li>
-                    <li className={`cursor-pointer text-center text-[#dddddd] px-4 uppercase ${typeChart === 2 && "active"}`} onClick={() => setTypeChart(2)}>vn30</li>
-                    <li className={`cursor-pointer text-center text-[#dddddd] px-4 ${typeChart === 3 && "active"}`} onClick={() => setTypeChart(3)}>
+                    <li id='vn30Intraday' className={`cursor-pointer text-center text-[#dddddd] px-4 uppercase ${typeChart === "vn30Intraday" && "active"}`} onClick={() => handleTypeChart('vn30Intraday')}>vn30 intraday</li>
+                    <li id='vn30' className={`cursor-pointer text-center text-[#dddddd] px-4 uppercase ${typeChart === 'vn30' && "active"}`} onClick={() => handleTypeChart("vn30")}>vn30</li>
+                    <li id='barChart' className={`cursor-pointer text-center text-[#dddddd] px-4 ${typeChart === 'barChart' && "active"}`} onClick={() => handleTypeChart('barChart')}>
                         <IoBarChart className='w-5 h-5' />
                     </li>
-                    <li className={`cursor-pointer text-center text-[#dddddd] px-4 ${typeChart === 4 && "active"}`} onClick={() => setTypeChart(4)}>
+                    <li id='ChartPie' className={`cursor-pointer text-center text-[#dddddd] px-4 ${typeChart === 'ChartPie' && "active"}`} onClick={() => handleTypeChart('ChartPie')}>
                         <FaChartPie className='w-5 h-5' />
                     </li>
                 </ul>

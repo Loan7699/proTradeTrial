@@ -1,9 +1,9 @@
 import { AiFillTrophy } from 'react-icons/ai'
 import { FaUser, FaSignInAlt } from 'react-icons/fa'
 import { BsFillCaretDownFill } from 'react-icons/bs'
-import { HiColorSwatch } from 'react-icons/hi'
+
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import jwt_decode from "jwt-decode";
 
 function Header({ setShowPopup }) {
@@ -21,12 +21,12 @@ function Header({ setShowPopup }) {
 
     const handleLogout = () => {
         localStorage.removeItem('auth')
-        // localStorage.removeItem('name')
+        localStorage.removeItem('name')
         navigate("/")
     }
 
     useEffect(() => {
-        let timerId = setInterval(() => {
+        setInterval(() => {
             setTime(new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds())
         }, 1000)
         // return clearInterval(timerId.current)

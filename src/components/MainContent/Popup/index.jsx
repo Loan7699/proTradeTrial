@@ -21,7 +21,7 @@ function Popup({ setShowPopup }) {
                     setUserRank(res.data.sort((a, b) => b.netAssetValue - a.netAssetValue))
                 }
                 )
-        }, 10000)
+        }, 1000)
     }, [])
 
     console.log(userRank);

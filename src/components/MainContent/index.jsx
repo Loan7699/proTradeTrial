@@ -23,7 +23,7 @@ function MainContent() {
             <div className="bg-[#131722] flex overflow-hidden height-content">
                 <ColFirst />
                 <ColSecond />
-                { showCol && <ColThird  menu={menu} handleShow={handleShowCol}/>}
+                { showCol && <ColThird  menu={menu} handleShow={handleShowCol} />}
                 <FooterLeft />
                 <FooterRight handleMenu={handleMenu} menu={menu} showCol={showCol}/>
             </div>
